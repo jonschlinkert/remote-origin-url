@@ -10,9 +10,10 @@ Install the module with [npm](https://npmjs.org/):
 npm i remote-origin-url --save
 ```
 
+## Usage
+
 ```js
 var origin = require('remote-origin-url');
-
 console.log(origin());
 // "https://github.com/jonschlinkert/remote-origin-url.git"
 ```

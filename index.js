@@ -19,14 +19,14 @@ var warn = chalk.yellow;
 var origin = module.exports = function(dir) {
   var git = findup('.git/config', {cwd: dir || process.cwd()});
   var str = fs.readFileSync(git, 'utf8');
+  return ini.parse(str);
+};
+
+origin.url = function(dir) {
   try {
-    return ini.parse(str);
+    return origin(dir)['remote "origin"'].url;
   } catch(e) {
     e += '\n[remote-origin-url]: ' + warn('This probably means that a remote origin has not been defined for this repository yet.');
     return new Error(e);
   }
-};
-
-origin.url = function(dir) {
-  return origin(dir)['remote "origin"'].url;
 };

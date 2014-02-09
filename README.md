@@ -22,14 +22,14 @@ Using the defaults:
 
 ```js
 var origin = require('remote-origin-url');
-console.log(origin());
+console.log(origin.url());
 // "https://github.com/jonschlinkert/remote-origin-url.git"
 ```
 
 Specify the "base" directory, excluding `.git`. Example:
 
 ```
-origin(__dirname);
+origin.url(__dirname);
 ```
 
 ## Authors

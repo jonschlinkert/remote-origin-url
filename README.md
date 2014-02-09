@@ -1,6 +1,6 @@
 # remote-origin-url [![NPM version](https://badge.fury.io/js/remote-origin-url.png)](http://badge.fury.io/js/remote-origin-url)
 
-> The best project ever.
+> Extract the git remote origin URL from your local git repository. Remember! A remote origin must exist first!
 
 ## Installation
 

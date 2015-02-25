@@ -1,32 +1,47 @@
-/*
- * remote-origin-url
- * https://github.com/jonschlinkert/remote-origin-url
+/*!
+ * remote-origin-url <https://github.com/jonschlinkert/remote-origin-url>
  *
- * Copyright (c) 2014 Jon Schlinkert
- * Licensed under the MIT license.
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var ini = require('ini');
-var chalk = require('chalk');
-var findup = require('findup-sync');
+var parse = require('parse-git-config');
 
-var warn = chalk.yellow;
+/**
+ * Expose `originUrl`
+ */
 
-var origin = module.exports = function(dir) {
-  var git = findup('.git/config', {cwd: dir || process.cwd()});
-  var str = fs.readFileSync(git, 'utf8');
-  return ini.parse(str);
-};
 
-origin.url = function(dir) {
+module.exports = originUrl;
+
+function originUrl(cwd, cb) {
+  if (typeof cwd === 'function') {
+    cb = cwd;
+    cwd = null;
+  }
+
+  parse(cwd, function (err, parsed) {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        cb(new Error('.git/config does not exist'));
+        return;
+      }
+      cb(err);
+      return;
+    }
+    var origin = parsed['remote "origin"'];
+    cb(null, origin && origin.url);
+  });
+}
+
+originUrl.sync = function(cwd) {
   try {
-    return origin(dir)['remote "origin"'].url;
-  } catch(e) {
-    e += '\n[remote-origin-url]: ' + warn('This probably means that a remote origin has not been defined for this repository yet.');
-    return new Error(e);
+    var parsed = parse.sync(cwd);
+    var origin = parsed['remote "origin"'];
+    return origin && origin.url;
+  } catch(err) {
+    throw err;
   }
 };

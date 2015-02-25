@@ -18,15 +18,33 @@ bower install remote-origin-url --save
 Using the defaults:
 
 ```js
-var originUrl = require('remote-origin-url');
-originUrl()
-// "https://github.com/jonschlinkert/remote-origin-url.git"
+var url = require('remote-origin-url');
+url(function (err, res) {
+  // res => "https://github.com/jonschlinkert/remote-origin-url.git"
+})
 ```
 
 Specify the `cwd` to use:
 
 ```js
-origin.url(__dirname);
+url(__dirname, function (err, res) {
+  // res => "https://github.com/jonschlinkert/remote-origin-url.git"
+})
+```
+
+### sync
+
+```js
+url.sync();
+//=> "https://github.com/jonschlinkert/remote-origin-url.git"
+```
+
+Specify the `cwd` to use:
+
+
+```js
+url.sync(__dirname);
+//=> "https://github.com/jonschlinkert/remote-origin-url.git"
 ```
 
 

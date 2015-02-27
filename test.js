@@ -1,13 +1,12 @@
 'use strict';
 
-require('should');
 var url = require('./');
+require('should');
 
 describe('async:', function () {
-  it('should trow when not found', function (cb) {
+  it('should return `null` when not found', function (cb) {
     url('foo', function (err, res) {
-      err.should.be.an.instanceof(Error);
-      err.message.should.equal('.git/config does not exist');
+      (res == null).should.be.true;
       cb();
     });
   });
@@ -25,9 +24,7 @@ describe('sync', function () {
     url.sync().should.equal('https://github.com/jonschlinkert/remote-origin-url.git');
   });
 
-  it('should throw when config is not found.', function () {
-    (function () {
-      url.sync('foo');
-    }).should.throw('.git/config does not exist.');
+  it('should return `null` when config is not found.', function () {
+    (url.sync('foo') == null).should.be.true;
   });
 });

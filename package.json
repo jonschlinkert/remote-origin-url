@@ -1,7 +1,7 @@
 {
   "name": "remote-origin-url",
   "description": "Get the git remote origin URL from your local git repository. Remember! A remote origin must exist first!",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://github.com/jonschlinkert/remote-origin-url",
   "author": {
     "name": "Jon Schlinkert",
@@ -29,7 +29,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "parse-git-config": "^0.1.0"
+    "parse-git-config": "^0.2.0"
   },
   "devDependencies": {
     "should": "^5.0.1"

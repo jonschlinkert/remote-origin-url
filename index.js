@@ -25,7 +25,7 @@ function originUrl(cwd, cb) {
   parse(cwd, function (err, parsed) {
     if (err) {
       if (err.code === 'ENOENT') {
-        cb(new Error('.git/config does not exist'));
+        cb(null, null);
         return;
       }
       cb(err);
@@ -39,6 +39,10 @@ function originUrl(cwd, cb) {
 originUrl.sync = function(cwd) {
   try {
     var parsed = parse.sync(cwd);
+    if (!parsed) {
+      return null;
+    }
+
     var origin = parsed['remote "origin"'];
     return origin && origin.url;
   } catch(err) {

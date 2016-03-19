@@ -47,6 +47,15 @@
     "plugins": [
       "gulp-format-md"
     ],
+    "related": {
+      "list": [
+        "git-user-name",
+        "parse-github-url",
+        "is-git-url",
+        "git-username",
+        "git-config-path"
+      ]
+    },
     "reflinks": [
       "verb"
     ],

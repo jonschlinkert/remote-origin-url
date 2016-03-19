@@ -10,12 +10,6 @@
     "url": "https://github.com/jonschlinkert/remote-origin-url/blob/master/LICENSE"
   },
   "homepage": "https://github.com/jonschlinkert/remote-origin-url",
-  "authors": [
-    {
-      "name": "Jon Schlinkert",
-      "homepage": "https://github.com/jonschlinkert"
-    }
-  ],
   "main": [
     "index.js"
   ],

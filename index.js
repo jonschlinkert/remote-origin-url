@@ -13,7 +13,6 @@ var parse = require('parse-git-config');
  * Expose `originUrl`
  */
 
-
 module.exports = originUrl;
 
 function originUrl(cwd, cb) {
@@ -22,7 +21,7 @@ function originUrl(cwd, cb) {
     cwd = null;
   }
 
-  parse(cwd, function (err, parsed) {
+  parse(cwd, function(err, parsed) {
     if (err) {
       if (err.code === 'ENOENT') {
         cb(null, null);
@@ -45,7 +44,7 @@ originUrl.sync = function(cwd) {
 
     var origin = parsed['remote "origin"'];
     return origin && origin.url;
-  } catch(err) {
+  } catch (err) {
     throw err;
   }
 };

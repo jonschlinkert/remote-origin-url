@@ -1,7 +1,8 @@
 'use strict';
 
-var url = require('./');
+require('mocha');
 require('should');
+var url = require('./');
 
 describe('async:', function() {
   it('should return `null` when not found', function(cb) {

@@ -20,12 +20,13 @@
     "test": "mocha"
   },
   "dependencies": {
-    "parse-git-config": "^0.3.2"
+    "parse-git-config": "^0.4.0"
   },
   "devDependencies": {
+    "delete": "^0.3.0",
+    "gitty": "^3.3.4",
     "gulp-format-md": "^0.1.7",
-    "mocha": "^2.4.5",
-    "should": "^8.2.2"
+    "mocha": "^2.4.5"
   },
   "keywords": [
     "git",

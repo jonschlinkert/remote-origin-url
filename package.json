@@ -1,7 +1,7 @@
 {
   "name": "remote-origin-url",
   "description": "Get the git remote origin URL from your local git repository. Remember! A remote origin must exist first!",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "homepage": "https://github.com/jonschlinkert/remote-origin-url",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/remote-origin-url",

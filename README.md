@@ -1,4 +1,4 @@
-# remote-origin-url [![NPM version](https://img.shields.io/npm/v/remote-origin-url.svg)](https://www.npmjs.com/package/remote-origin-url) [![Build Status](https://img.shields.io/travis/jonschlinkert/remote-origin-url.svg)](https://travis-ci.org/jonschlinkert/remote-origin-url)
+# remote-origin-url [![NPM version](https://img.shields.io/npm/v/remote-origin-url.svg?style=flat)](https://www.npmjs.com/package/remote-origin-url) [![NPM monthly downloads](https://img.shields.io/npm/dm/remote-origin-url.svg?style=flat)](https://npmjs.org/package/remote-origin-url) [![NPM total downloads](https://img.shields.io/npm/dt/remote-origin-url.svg?style=flat)](https://npmjs.org/package/remote-origin-url) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/remote-origin-url.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/remote-origin-url)
 
 > Get the git remote origin URL from your local git repository. Remember! A remote origin must exist first!
 
@@ -7,10 +7,10 @@
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install remote-origin-url --save
+$ npm install --save remote-origin-url
 ```
 
-Install with [bower](http://bower.io/)
+Install with [bower](https://bower.io/)
 
 ```sh
 $ bower install remote-origin-url --save
@@ -21,80 +21,89 @@ $ bower install remote-origin-url --save
 Using the defaults:
 
 ```js
-var url = require('remote-origin-url');
-url(function (err, res) {
-  // res => "https://github.com/jonschlinkert/remote-origin-url.git"
-})
+var remoteOriginUrl = require('remote-origin-url');
+remoteOriginUrl(function(err, url) {
+  if (err) return console.log(err);
+  console.log(url);
+  // url => "https://github.com/jonschlinkert/remote-origin-url.git"
+});
 ```
 
 Specify the `cwd` to use:
 
 ```js
-url(__dirname, function (err, res) {
-  // res => "https://github.com/jonschlinkert/remote-origin-url.git"
-})
+remoteOriginUrl(process.cwd(), function(err, url) {
+  if (err) return console.log(err);
+  console.log(url);
+  // url => "https://github.com/jonschlinkert/remote-origin-url.git"
+});
 ```
 
 ### sync
 
 ```js
-url.sync();
+console.log(remoteOriginUrl.sync());
 //=> "https://github.com/jonschlinkert/remote-origin-url.git"
 ```
 
 Specify the `cwd` to use:
 
 ```js
-url.sync(__dirname);
+console.log(remoteOriginUrl.sync(process.cwd()));
 //=> "https://github.com/jonschlinkert/remote-origin-url.git"
 ```
 
-## Related projects
+## About
 
-* [git-config-path](https://www.npmjs.com/package/git-config-path): Resolve the path to the user's global .gitconfig. | [homepage](https://github.com/jonschlinkert/git-config-path)
-* [git-user-name](https://www.npmjs.com/package/git-user-name): Get a user's name from git config at the project or global scope, depending on… [more](https://www.npmjs.com/package/git-user-name) | [homepage](https://github.com/jonschlinkert/git-user-name)
-* [git-username](https://www.npmjs.com/package/git-username): Get the username from a git remote origin URL. | [homepage](https://github.com/jonschlinkert/git-username)
-* [is-git-url](https://www.npmjs.com/package/is-git-url): Regex to validate that a URL is a git url. | [homepage](https://github.com/jonschlinkert/is-git-url)
-* [parse-github-url](https://www.npmjs.com/package/parse-github-url): Parse a github URL into an object. | [homepage](https://github.com/jonschlinkert/parse-github-url)
+### Related projects
 
-## Contributing
+* [git-config-path](https://www.npmjs.com/package/git-config-path): Resolve the path to the user's local or global .gitconfig. | [homepage](https://github.com/jonschlinkert/git-config-path "Resolve the path to the user's local or global .gitconfig.")
+* [git-user-name](https://www.npmjs.com/package/git-user-name): Get a user's name from git config at the project or global scope, depending on… [more](https://github.com/jonschlinkert/git-user-name) | [homepage](https://github.com/jonschlinkert/git-user-name "Get a user's name from git config at the project or global scope, depending on what git uses in the current context.")
+* [git-username](https://www.npmjs.com/package/git-username): Get the username from a git remote origin URL. | [homepage](https://github.com/jonschlinkert/git-username "Get the username from a git remote origin URL.")
+* [is-git-url](https://www.npmjs.com/package/is-git-url): Regex to validate that a URL is a git url. | [homepage](https://github.com/jonschlinkert/is-git-url "Regex to validate that a URL is a git url.")
+* [parse-github-url](https://www.npmjs.com/package/parse-github-url): Parse a github URL into an object. | [homepage](https://github.com/jonschlinkert/parse-github-url "Parse a github URL into an object.")
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/remote-origin-url/issues/new).
+### Contributing
 
-## Building docs
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](../../issues/new).
 
-Generate readme and API documentation with [verb](https://github.com/verbose/verb):
+### Contributors
 
-```sh
-$ npm install verb && npm run docs
-```
+| **Commits** | **Contributor** | 
+| --- | --- |
+| 27 | [jonschlinkert](https://github.com/jonschlinkert) |
+| 3 | [doowb](https://github.com/doowb) |
 
-Or, if [verb](https://github.com/verbose/verb) is installed globally:
+### Building docs
 
-```sh
-$ verb
-```
+_(This project's readme.md is generated by [verb](https://github.com/verbose/verb-generate-readme), please don't edit the readme directly. Any changes to the readme must be made in the [.verb.md](.verb.md) readme template.)_
 
-## Running tests
-
-Install dev dependencies:
+To generate the readme, run the following command:
 
 ```sh
-$ npm install -d && npm test
+$ npm install -g verbose/verb#dev verb-generate-readme && verb
 ```
 
-## Author
+### Running tests
+
+Running and reviewing unit tests is a great way to get familiarized with a library and its API. You can install dependencies and run tests with the following command:
+
+```sh
+$ npm install && npm test
+```
+
+### Author
 
 **Jon Schlinkert**
 
 * [github/jonschlinkert](https://github.com/jonschlinkert)
-* [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+* [twitter/jonschlinkert](https://twitter.com/jonschlinkert)
 
-## License
+### License
 
-Copyright © 2016 [Jon Schlinkert](https://github.com/jonschlinkert)
-Released under the [MIT license](https://github.com/jonschlinkert/remote-origin-url/blob/master/LICENSE).
+Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
+Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on March 19, 2016._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on July 11, 2017._

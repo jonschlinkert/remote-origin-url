@@ -15,13 +15,13 @@ var parse = require('parse-git-config');
 
 module.exports = originUrl;
 
-function originUrl(cwd, cb) {
-  if (typeof cwd === 'function') {
-    cb = cwd;
-    cwd = null;
+function originUrl(path, cb) {
+  if (typeof path === 'function') {
+    cb = path;
+    path = null;
   }
 
-  parse(cwd, function(err, parsed) {
+  parse({path: path}, function(err, parsed) {
     if (err) {
       if (err.code === 'ENOENT') {
         cb(null, null);
@@ -35,9 +35,9 @@ function originUrl(cwd, cb) {
   });
 }
 
-originUrl.sync = function(cwd) {
+originUrl.sync = function(path) {
   try {
-    var parsed = parse.sync(cwd);
+    var parsed = parse.sync({path: path});
     if (!parsed) {
       return null;
     }

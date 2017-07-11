@@ -9,7 +9,7 @@
 
 var parse = require('parse-git-config');
 
-function originUrl(path, cb) {
+function remoteOriginUrl(path, cb) {
   if (typeof path === 'function') {
     cb = path;
     path = null;
@@ -17,19 +17,15 @@ function originUrl(path, cb) {
 
   parse({path: path}, function(err, parsed) {
     if (err) {
-      if (err.code === 'ENOENT') {
-        cb(null, null);
-        return;
-      }
-      cb(err);
+      cb(err.code !== 'ENOENT' ? err : undefined);
       return;
     }
     var origin = parsed['remote "origin"'];
-    cb(null, origin && origin.url);
+    cb(null, origin ? origin.url : null);
   });
 }
 
-originUrl.sync = function(path) {
+remoteOriginUrl.sync = function(path) {
   try {
     var parsed = parse.sync({path: path});
     if (!parsed) {
@@ -37,14 +33,14 @@ originUrl.sync = function(path) {
     }
 
     var origin = parsed['remote "origin"'];
-    return origin && origin.url;
+    return origin ? origin.url : null;
   } catch (err) {
     throw err;
   }
 };
 
 /**
- * Expose `originUrl`
+ * Expose `remoteOriginUrl`
  */
 
-module.exports = originUrl;
+module.exports = remoteOriginUrl;

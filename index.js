@@ -1,19 +1,13 @@
 /*!
  * remote-origin-url <https://github.com/jonschlinkert/remote-origin-url>
  *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 'use strict';
 
 var parse = require('parse-git-config');
-
-/**
- * Expose `originUrl`
- */
-
-module.exports = originUrl;
 
 function originUrl(path, cb) {
   if (typeof path === 'function') {
@@ -48,3 +42,9 @@ originUrl.sync = function(path) {
     throw err;
   }
 };
+
+/**
+ * Expose `originUrl`
+ */
+
+module.exports = originUrl;

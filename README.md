@@ -53,6 +53,18 @@ console.log(remoteOriginUrl.sync(process.cwd()));
 //=> "https://github.com/jonschlinkert/remote-origin-url.git"
 ```
 
+## Release history
+
+### v1.0.0
+
+* no significant changes, just minor code formatting. it's time for a 1.0 release!
+
+### v0.5.3
+
+**bug fixes**
+
+* pass an object to [parse-git-config](https://github.com/jonschlinkert/parse-git-config) to ensure that `path` is used.
+
 ## About
 
 ### Related projects

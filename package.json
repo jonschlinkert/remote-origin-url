@@ -18,22 +18,24 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">=8"
   },
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "parse-git-config": "^1.1.1"
+    "parse-git-config": "^3.0.0"
   },
   "devDependencies": {
     "delete": "^1.1.0",
     "gitty": "^3.6.0",
-    "gulp-format-md": "^1.0.0",
-    "mocha": "^3.4.2"
+    "gulp-format-md": "^2.0.0",
+    "mocha": "^5.2.0"
   },
   "keywords": [
     "git",
+    "git remote",
+    "git remote origin",
     "node",
     "node.js",
     "origin",

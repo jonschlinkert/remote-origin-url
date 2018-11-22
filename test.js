@@ -1,22 +1,22 @@
 'use strict';
 
 require('mocha');
-var fs = require('fs');
-var path = require('path');
-var assert = require('assert');
-var gitty = require('gitty');
-var del = require('delete');
-var url = require('./');
-var repo;
+const fs = require('fs');
+const path = require('path');
+const assert = require('assert');
+const gitty = require('gitty');
+const del = require('delete');
+const url = require('./');
+let repo;
 
-var cwd = process.cwd();
-var tmp = path.resolve(__dirname, 'fixtures');
-var git = path.resolve(tmp, '.git');
+const cwd = process.cwd();
+const tmp = path.resolve(__dirname, 'fixtures');
+const git = path.resolve(tmp, '.git');
 
-describe('repo', function() {
-  before(function(cb) {
+describe('repo', () => {
+  before(cb => {
     process.chdir(tmp);
-    del(git, function(err) {
+    del(git, (err) => {
       if (err) return cb(err);
       repo = gitty(tmp);
       repo.initSync();
@@ -26,41 +26,41 @@ describe('repo', function() {
     });
   });
 
-  after(function(cb) {
+  after(cb => {
     process.chdir(cwd);
     del(git, cb);
   });
 
-  describe('async', function() {
-    it('should return the git remote origin URL.', function(cb) {
-      url(function(err, res) {
+  describe('async', () => {
+    it('should return the git remote origin URL.', cb => {
+      url((err, res) => {
         assert.equal(res, 'https://github.com/jonschlinkert/test-project.git');
         cb();
       })
     });
   });
 
-  describe('sync', function() {
-    it('should return the git remote origin URL.', function() {
+  describe('sync', () => {
+    it('should return the git remote origin URL.', () => {
       assert.equal(url.sync(), 'https://github.com/jonschlinkert/test-project.git');
     });
   });
 });
 
-describe('no repo', function() {
-  describe('async', function() {
-    it('should return `null` when not found', function(cb) {
-      url('foo', function(err, res) {
+describe('no repo', () => {
+  describe('async', () => {
+    it('should return `undefined` when not found', cb => {
+      url('foo', (err, res) => {
         if (err) return cb(err);
-        assert.equal(res, null);
+        assert.equal(res, void 0);
         cb();
       });
     });
   });
 
-  describe('sync', function() {
-    it('should return `null` when config is not found.', function() {
-      assert.equal(url.sync('foo'), null);
+  describe('sync', () => {
+    it('should return `undefined` when config is not found.', () => {
+      assert.equal(url.sync('foo'), void 0);
     });
   });
 });

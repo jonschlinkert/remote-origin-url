@@ -1,46 +1,67 @@
 /*!
  * remote-origin-url <https://github.com/jonschlinkert/remote-origin-url>
  *
- * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Copyright (c) 2014-present, Jon Schlinkert.
  * Released under the MIT License.
  */
 
 'use strict';
 
-var parse = require('parse-git-config');
+const parse = require('parse-git-config');
 
-function remoteOriginUrl(path, cb) {
-  if (typeof path === 'function') {
-    cb = path;
-    path = null;
+const originUrl = (options, cb) => {
+  if (typeof options === 'function') {
+    cb = options;
+    options = null;
   }
 
-  parse({path: path}, function(err, parsed) {
-    if (err) {
-      cb(err.code !== 'ENOENT' ? err : undefined);
-      return;
-    }
-    var origin = parsed['remote "origin"'];
-    cb(null, origin ? origin.url : null);
+  if (typeof options === 'string') {
+    options = { path: options };
+  }
+
+  let promise = originUrl.promise(options);
+  if (typeof cb === 'function') {
+    promise.then(url => cb(null, url)).catch(cb);
+    return;
+  }
+  return promise;
+};
+
+originUrl.promise = options => {
+  return new Promise((resolve, reject) => {
+    parse(options, (err, parsed) => {
+      if (err) {
+        reject(err.code !== 'ENOENT' ? err : undefined);
+        return;
+      }
+      let origin = parsed[getKey(parsed)];
+      resolve(origin ? origin.url : void 0);
+    });
   });
-}
+};
 
-remoteOriginUrl.sync = function(path) {
-  try {
-    var parsed = parse.sync({path: path});
-    if (!parsed) {
-      return null;
-    }
+originUrl.sync = options => {
+  if (typeof options === 'string') {
+    options = { path: options };
+  }
 
-    var origin = parsed['remote "origin"'];
-    return origin ? origin.url : null;
-  } catch (err) {
-    throw err;
+  let parsed = parse.sync(options);
+  if (parsed) {
+    let origin = parsed[getKey(parsed)];
+    return origin ? origin.url : void 0;
   }
 };
 
+function getKey(obj) {
+  if (obj.hasOwnProperty('remote "origin"')) {
+    return 'remote "origin"';
+  }
+  let keys = Object.keys(obj);
+  return keys.find(key => /^remote /.test(key));
+}
+
 /**
- * Expose `remoteOriginUrl`
+ * Expose `originUrl`
  */
 
-module.exports = remoteOriginUrl;
+module.exports = originUrl;

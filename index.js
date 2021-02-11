@@ -53,10 +53,10 @@ originUrl.sync = options => {
 };
 
 function getKey(obj) {
-  if (obj.hasOwnProperty('remote "origin"')) {
+  let keys = Object.keys(obj);
+  if (keys.includes('remote "origin"')) {
     return 'remote "origin"';
   }
-  let keys = Object.keys(obj);
   return keys.find(key => /^remote /.test(key));
 }
 
